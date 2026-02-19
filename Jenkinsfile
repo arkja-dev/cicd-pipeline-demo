@@ -2,10 +2,9 @@ pipeline {
     agent any
 
     stages {
-        stage('Clone Repository') {
+        stage('Build App') {
             steps {
-                git branch: 'main',
-                    url: 'https://github.com/arkja-dev/cicd-pipeline-demo.git'
+                sh 'node --version || echo Node not required here'
             }
         }
 
@@ -15,13 +14,10 @@ pipeline {
             }
         }
 
-        stage('Run Docker Container') {
+        stage('Run Container') {
             steps {
-                sh '''
-                docker stop cicd-app || true
-                docker rm cicd-app || true
-                docker run -d -p 3000:3000 --name cicd-app cicd-pipeline-demo
-                '''
+                sh 'docker rm -f cicd-demo || true'
+                sh 'docker run -d -p 3000:3000 --name cicd-demo cicd-pipeline-demo'
             }
         }
     }

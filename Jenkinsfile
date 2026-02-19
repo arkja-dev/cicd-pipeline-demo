@@ -5,7 +5,7 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/<YOUR_GITHUB_USERNAME>/cicd-pipeline-demo.git'
+                    url: 'https://github.com/arkja-dev/cicd-pipeline-demo.git'
             }
         }
 
